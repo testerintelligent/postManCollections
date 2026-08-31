@@ -1,0 +1,99 @@
+{
+  "info": {
+    "_postman_id": "bbb4165b-918d-4211-bc31-464136d012b0",
+    "name": "WorkReady",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27551199"
+  },
+  "item": [
+    {
+      "name": "Training",
+      "item": [
+        {
+          "name": "createEmployeeRecord",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "const moment = require('moment');",
+                  "",
+                  "// Pull a random past timestamp and format it",
+                  "let randomPastDate = pm.variables.replaceIn('{{$randomDatePast}}');",
+                  "let formattedDate = moment(randomPastDate).format(\"YYYY-MM-DD\");",
+                  "pm.variables.set(\"randomDate\", formattedDate);",
+                  "",
+                  "// Your list of static choices",
+                  "var userRoles = [\"Completed\", \"In Progress\", \"Not Started\"];",
+                  "// Pick one randomly",
+                  "var randomRole = _.sample(userRoles);",
+                  "// Set it to an environment or local variable",
+                  "pm.environment.set(\"chosenRole\", randomRole);",
+                  "",
+                  "// Your list of static choices",
+                  "var projectName  = [\"ABC\", \"CDE\", \"EFG\",\"HIJ\",\"KLM\"];",
+                  "// Pick one randomly",
+                  "var randomProject = _.sample(projectName);",
+                  "// Set it to an environment or local variable",
+                  "pm.environment.set(\"chosenProject\", randomProject);",
+                  "",
+                  "// Your list of COURCE choices",
+                  "var coursetName  = [\"AI\", \"PYTHON\", \"PLAYWRIGHT\",\"GUIDEWIRE\"];",
+                  "// Pick one randomly",
+                  "var randomCourse = _.sample(coursetName);",
+                  "// Set it to an environment or local variable",
+                  "pm.environment.set(\"chosenCourse\", randomCourse);",
+                  "",
+                  "",
+                  "// Your list of Training Type choices",
+                  "var trainingType  = [\"Udemy\",\"Coursera\", \"Virtual\",\"Classroom\"];",
+                  "// Pick one randomly",
+                  "var randomTrainingType = _.sample(trainingType);",
+                  "// Set it to an environment or local variable",
+                  "pm.environment.set(\"chosenTrainingType\", randomTrainingType);",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empId\": \"TG-{{$randomInt}}\",\n  \"employeeName\": \"{{$randomFullName}}\",\n  \"course\": \"{{chosenCourse}}\",\n  \"startDate\": \"{{randomDate}}\",\n  \"endDate\": \"{{randomDate}}\",\n  \"status\": \"{{chosenRole}}\",\n  \"trainerName\": \"{{$randomFullName}}\",\n  \"trainingType\": \"{{chosenTrainingType}}\",\n  \"percentCompleted\": 100,\n  \"projectName\": \"{{chosenProject}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://10.192.190.158:5002/api/trainings/",
+              "host": [
+                "http://10.192.190.158"
+              ],
+              "port": "5002",
+              "path": [
+                "api",
+                "trainings",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

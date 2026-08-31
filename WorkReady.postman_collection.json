@@ -92,6 +92,87 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "createCandidate",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "const moment = require('moment');",
+                  "",
+                  "// Pull a random past timestamp and format it",
+                  "let randomPastDate = pm.variables.replaceIn('{{$randomDatePast}}');",
+                  "let formattedDate = moment(randomPastDate).format(\"YYYY-MM-DD\");",
+                  "pm.variables.set(\"randomDate\", formattedDate);",
+                  "",
+                  "// Your list of static choices",
+                  "var userDepartment = [\"CSE\", \"IT\", \"ECE\"];",
+                  "var randomDepartment = _.sample(userDepartment);",
+                  "pm.environment.set(\"chosenDepartment\", randomDepartment);",
+                  "",
+                  "// Your list of static choices",
+                  "var userL1Status = [\"Selected\", \"Non Seleted\", \"On Hold\"];",
+                  "var randomL1Status = _.sample(userL1Status);",
+                  "pm.environment.set(\"chosenL1Status\", randomL1Status);",
+                  "",
+                  "// Your list of static choices",
+                  "var userL2Status = [\"Selected\", \"Non Seleted\", \"On Hold\"];",
+                  "var randomL2Status = _.sample(userL2Status);",
+                  "pm.environment.set(\"chosenL2Status\", randomL2Status);",
+                  "",
+                  "// Generate a random integer between 1 and 5 (inclusive)",
+                  "const randomNumber = _.random(1, 5);",
+                  "// Save it as a local variable for the current request",
+                  "pm.variables.set(\"random_1_to_5\", randomNumber);",
+                  "",
+                  "",
+                  "",
+                  "// Generate a random integer between 1 and 5 (inclusive)",
+                  "const randomNumber1 = _.random(1, 5);",
+                  "// Save it as a local variable for the current request",
+                  "pm.variables.set(\"random1_1_to_5\", randomNumber1);",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",\n    \"communication\": {{random_1_to_5}},\n    \"technicalSkill\": {{random1_1_to_5}},\n    \"programmingLanguageSkill\": {{random_1_to_5}},\n    \"databaseSkill\": {{random1_1_to_5}},\n    \"attitudeTowardsLearning\": {{random_1_to_5}},\n    \"devExperience\": {{random1_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\"\n}"
+            },
+            "url": {
+              "raw": "http://10.192.190.158:5002/api/candidates/",
+              "host": [
+                "http://10.192.190.158"
+              ],
+              "port": "5002",
+              "path": [
+                "api",
+                "candidates",
+                ""
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }

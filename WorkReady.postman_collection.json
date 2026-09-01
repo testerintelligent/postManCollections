@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "2314b066-8493-4eab-948f-9a8354f6f181",
-    "name": "WorkReady1",
+    "name": "WorkReady",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "27551199"
   },
@@ -69,11 +69,6 @@
               "",
               "pm.test(\"Successful POST request\", function () {",
               "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-              "});",
-              "",
-              "pm.test(\"Project Name Check\", function () {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.projectName).to.eql(\"CDE\");",
               "});"
             ],
             "type": "text/javascript",

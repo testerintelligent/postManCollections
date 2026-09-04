@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "2314b066-8493-4eab-948f-9a8354f6f181",
+    "_postman_id": "2c889dea-6aa6-4f93-aa47-067094157525",
     "name": "WorkReady",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "27551199"
@@ -20,12 +20,7 @@
               "let formattedDate = moment(randomPastDate).format(\"YYYY-MM-DD\");",
               "pm.variables.set(\"randomDate\", formattedDate);",
               "",
-              "// Your list of static choices",
-              "var userRoles = [\"Completed\", \"In Progress\", \"Not Started\"];",
-              "// Pick one randomly",
-              "var randomRole = _.sample(userRoles);",
-              "// Set it to an environment or local variable",
-              "pm.environment.set(\"chosenRole\", randomRole);",
+              "",
               "",
               "// Your list of static choices",
               "var projectName  = [\"ABC\", \"CDE\", \"EFG\",\"HIJ\",\"KLM\"];",
@@ -50,6 +45,32 @@
               "pm.environment.set(\"chosenTrainingType\", randomTrainingType);",
               "",
               "",
+              "// Your list of static choices",
+              "var userRoles = [\"Completed\", \"In Progress\", \"Not Started\"];",
+              "// Pick one randomly",
+              "var randomRole = _.sample(userRoles);",
+              "// Set it to an environment or local variable",
+              "pm.environment.set(\"chosenRole\", randomRole);",
+              "",
+              "",
+              "// Pick the status first",
+              "const statuses = [\"Not Started\", \"In Progress\", \"Completed\"];",
+              "const chosenRole = statuses[Math.floor(Math.random() * statuses.length)];",
+              "pm.variables.set(\"chosenRole\", chosenRole);",
+              "",
+              "// Set percentCompleted based on status",
+              "//let chosenRole;",
+              "let percent;",
+              "if (chosenRole === \"Not Started\") {",
+              "    percent = 0;",
+              "} else if (chosenRole === \"Completed\") {",
+              "    percent = 100;   // optional: completed = 100",
+              "} else {",
+              "    percent = Math.floor(Math.random() * 100) + 1;  // 1 to 100",
+              "}",
+              "pm.variables.set(\"random_1_to_100\", percent);",
+              "",
+              "",
               "",
               "",
               ""
@@ -69,7 +90,8 @@
               "",
               "pm.test(\"Successful POST request\", function () {",
               "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-              "});"
+              "});",
+              ""
             ],
             "type": "text/javascript",
             "packages": {},
@@ -85,7 +107,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"empId\": \"TG-{{$randomInt}}\",\n    \"employeeName\": \"{{$randomFullName}}\",\n    \"course\": \"{{chosenCourse}}\",\n    \"startDate\": \"{{randomDate}}\",\n    \"endDate\": \"{{randomDate}}\",\n    \"status\": \"{{chosenRole}}\",\n    \"trainerName\": \"{{$randomFullName}}\",\n    \"trainingType\": \"{{chosenTrainingType}}\",\n    \"percentCompleted\": 100,\n    \"projectName\": \"{{chosenProject}}\"\n}",
+          "raw": "{\n    \"empId\": \"TG-{{$randomInt}}\",\n    \"employeeName\": \"{{$randomFullName}}\",\n    \"course\": \"{{chosenCourse}}\",\n    \"startDate\": \"{{randomDate}}\",\n    \"endDate\": \"{{randomDate}}\",\n    \"status\": \"{{chosenRole}}\",\n    \"trainerName\": \"{{$randomFullName}}\",\n    \"trainingType\": \"{{chosenTrainingType}}\",\n    \"percentCompleted\": {{random_1_to_100}},\n    \"projectName\": \"{{chosenProject}}\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -93,9 +115,9 @@
           }
         },
         "url": {
-          "raw": "http://10.192.190.158:5002/api/trainings/",
+          "raw": "localhost:5002/api/trainings/",
           "host": [
-            "http://10.192.190.158"
+            "localhost"
           ],
           "port": "5002",
           "path": [
@@ -188,12 +210,12 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",\n    \"communication\": {{random_1_to_5}},\n    \"technicalSkill\": {{random1_1_to_5}},\n    \"programmingLanguageSkill\": {{random_1_to_5}},\n    \"databaseSkill\": {{random1_1_to_5}},\n    \"attitudeTowardsLearning\": {{random_1_to_5}},\n    \"devExperience\": {{random1_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\"\n}"
+          "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",\n    \"communication\": {{random_1_to_5}},\n    \"technicalSkill\": {{random1_1_to_5}},\n    \"programmingLanguageSkill\": {{random_1_to_5}},\n    \"databaseSkill\": {{random1_1_to_5}},\n    \"attitudeTowardsLearning\": {{random_1_to_5}},\n    \"devExperience\": {{random1_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l1Remarks\": \"{{$randomStreetAddress}}\",\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\",\n    \"l2Remarks\": \"{{$randomStreetAddress}}\"\n}"
         },
         "url": {
-          "raw": "http://10.192.190.158:5002/api/candidates/",
+          "raw": "localhost:5002/api/candidates/",
           "host": [
-            "http://10.192.190.158"
+            "localhost"
           ],
           "port": "5002",
           "path": [

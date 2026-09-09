@@ -115,9 +115,9 @@
           }
         },
         "url": {
-          "raw": "10.192.190.158:5002/api/trainings/",
+          "raw": "{{URL}}:5002/api/trainings/",
           "host": [
-            "10.192.190.158"
+            "{{URL}}"
           ],
           "port": "5002",
           "path": [
@@ -210,12 +210,12 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",\n    \"communication\": {{random_1_to_5}},\n    \"technicalSkill\": {{random1_1_to_5}},\n    \"programmingLanguageSkill\": {{random_1_to_5}},\n    \"databaseSkill\": {{random1_1_to_5}},\n    \"attitudeTowardsLearning\": {{random_1_to_5}},\n    \"devExperience\": {{random1_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l1Remarks\": \"{{$randomStreetAddress}}\",\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\",\n    \"l2Remarks\": \"{{$randomStreetAddress}}\"\n}"
+          "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",\n    \"communication\": {{random_1_to_5}},\n    \"technicalSkill\": {{random1_1_to_5}},\n    \"programmingLanguageSkill\": {{random_1_to_5}},\n    \"databaseSkill\": {{random1_1_to_5}},\n    \"attitudeTowardsLearning\": {{random_1_to_5}},\n    \"devExperience\": {{random1_1_to_5}},\n    \"writtenTestStatus\": \"{{chosenL1Status}}\",\n    \"groupDiscussionStatus\": \"{{chosenL1Status}}\",\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l1Remarks\": \"{{$randomStreetAddress}}\",\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\",\n    \"l2Remarks\": \"{{$randomStreetAddress}}\"\n}"
         },
         "url": {
-          "raw": "10.192.190.158:5002/api/candidates/",
+          "raw": "{{URL}}:5002/api/candidates/",
           "host": [
-            "10.192.190.158"
+            "{{URL}}"
           ],
           "port": "5002",
           "path": [

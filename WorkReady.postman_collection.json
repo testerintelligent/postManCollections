@@ -163,12 +163,25 @@
               "// Save it as a local variable for the current request",
               "pm.variables.set(\"random_1_to_5\", randomNumber);",
               "",
-              "",
-              "",
               "// Generate a random integer between 1 and 5 (inclusive)",
               "const randomNumber1 = _.random(1, 5);",
               "// Save it as a local variable for the current request",
               "pm.variables.set(\"random1_1_to_5\", randomNumber1);",
+              "",
+              "// Generate a random integer between 1 and 5 (inclusive)",
+              "const randomNumber2 = _.random(1, 5);",
+              "// Save it as a local variable for the current request",
+              "pm.variables.set(\"random2_1_to_5\", randomNumber2);",
+              "",
+              "// Generate a random integer between 1 and 5 (inclusive)",
+              "const randomNumber3 = _.random(1, 5);",
+              "// Save it as a local variable for the current request",
+              "pm.variables.set(\"random3_1_to_5\", randomNumber3);",
+              "",
+              "// Generate a random integer between 1 and 5 (inclusive)",
+              "const randomNumber4 = _.random(1, 5);",
+              "// Save it as a local variable for the current request",
+              "pm.variables.set(\"random4_1_to_5\", randomNumber4);",
               "",
               "",
               ""
@@ -210,7 +223,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"candidateId\": \"KIOT-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"sdf\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",    \n    \"writtenTestScore\": {{random_1_to_5}},\n    \"groupDiscussionScore\": {{random_1_to_5}},\n    \"writtenTestStatus\": \"{{chosenL1Status}}\",\n    \"groupDiscussionStatus\": \"{{chosenL1Status}}\",\n    \"preliminaryTestsRemarks\": \"{{$randomStreetAddress}}\",\n    \"l1Communication\": {{random_1_to_5}},\n    \"l1TechnicalSkill\": {{random_1_to_5}},\n    \"l1ProgrammingLanguageSkill\": {{random_1_to_5}},\n    \"l1DatabaseSkill\": {{random_1_to_5}},\n    \"l1AttitudeTowardsLearning\": {{random_1_to_5}},\n    \"l1DevExperience\": {{random_1_to_5}},\n    \"l1Score\": {{random_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l1Remarks\": \"{{$randomStreetAddress}}\",\n    \"l2Communication\": {{random_1_to_5}},\n    \"l2TechnicalSkill\": {{random_1_to_5}},\n    \"l2ProgrammingLanguageSkill\": {{random_1_to_5}},\n    \"l2DatabaseSkill\": {{random_1_to_5}},\n    \"l2AttitudeTowardsLearning\": {{random_1_to_5}},\n    \"l2DevExperience\": {{random_1_to_5}},\n    \"l2Score\": {{random_1_to_5}},\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL1Status}}\",\n    \"l2Remarks\": \"{{$randomStreetAddress}}\"\n\n}"
+          "raw": "{\n    \"candidateId\": \"BUACS-{{$randomInt}}\",\n    \"candidateName\": \"{{$randomFullName}}\",\n    \"candidateEmail\": \"{{$randomEmail}}\",\n    \"course\": \"BE\",\n    \"department\": \"{{chosenDepartment}}\",    \n    \"writtenTestScore\": {{random_1_to_5}},\n    \"groupDiscussionScore\": {{random1_1_to_5}},\n    \"writtenTestStatus\": \"{{chosenL1Status}}\",\n    \"groupDiscussionStatus\": \"{{chosenL1Status}}\",\n    \"preliminaryTestsRemarks\": \"{{$randomAlphaNumeric}}\",\n    \"l1Communication\": {{random2_1_to_5}},\n    \"l1TechnicalSkill\": {{random3_1_to_5}},\n    \"l1ProgrammingLanguageSkill\": {{random4_1_to_5}},\n    \"l1DatabaseSkill\": {{random1_1_to_5}},\n    \"l1AttitudeTowardsLearning\": {{random2_1_to_5}},\n    \"l1DevExperience\": {{random3_1_to_5}},\n    \"l1Score\": {{random4_1_to_5}},\n    \"l1ConductedBy\": \"{{$randomFullName}}\",\n    \"l1ConductedDate\": \"{{randomDate}}\",\n    \"l1Status\": \"{{chosenL1Status}}\",\n    \"l1Remarks\": \"{{$randomAlphaNumeric}}\",\n    \"l2Communication\": {{random4_1_to_5}},\n    \"l2TechnicalSkill\": {{random3_1_to_5}},\n    \"l2ProgrammingLanguageSkill\": {{random_1_to_5}},\n    \"l2DatabaseSkill\": {{random1_1_to_5}},\n    \"l2AttitudeTowardsLearning\": {{random2_1_to_5}},\n    \"l2DevExperience\": {{random1_1_to_5}},\n    \"l2Score\": {{random4_1_to_5}},\n    \"l2ConductedBy\": \"{{$randomFullName}}\",\n    \"l2ConductedDate\": \"{{randomDate}}\",\n    \"l2Status\": \"{{chosenL2Status}}\",\n    \"l2Remarks\": \"{{$randomAlphaNumeric}}\"\n\n}"
         },
         "url": {
           "raw": "{{URL}}:5002/api/candidates/",

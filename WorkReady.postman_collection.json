@@ -13,6 +13,34 @@
           "listen": "prerequest",
           "script": {
             "exec": [
+              "function isExpired(token) {",
+              "    try {",
+              "        const payload = JSON.parse(atob(token.split(\".\")[1]));",
+              "        return Date.now() >= payload.exp * 1000;",
+              "    } catch (e) {",
+              "        return true; // unreadable token -> treat as expired",
+              "    }",
+              "}",
+              "",
+              "const existingToken = pm.environment.get(\"token\");",
+              "",
+              "if (!existingToken || isExpired(existingToken)) {",
+              "    pm.sendRequest({",
+              "        url: pm.environment.get(\"URL\") + \":5002/api/login\",",
+              "        method: \"POST\",",
+              "        header: { \"Content-Type\": \"application/json\" },",
+              "        body: {",
+              "            mode: \"raw\",",
+              "            raw: JSON.stringify({ loginId: \"demo\", password: \"1234\" })",
+              "        }",
+              "    }, function (err, res) {",
+              "        if (err) {",
+              "            console.error(\"Login failed:\", err);",
+              "        } else {",
+              "            pm.environment.set(\"token\", res.json().token);",
+              "        }",
+              "    });",
+              "}",
               "const moment = require('moment');",
               "",
               "// Pull a random past timestamp and format it",
@@ -101,10 +129,23 @@
       ],
       "request": {
         "auth": {
-          "type": "noauth"
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
         },
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n    \"empId\": \"TG-{{$randomInt}}\",\n    \"employeeName\": \"{{$randomFullName}}\",\n    \"course\": \"{{chosenCourse}}\",\n    \"startDate\": \"{{randomDate}}\",\n    \"endDate\": \"{{randomDate}}\",\n    \"status\": \"{{chosenRole}}\",\n    \"trainerName\": \"{{$randomFullName}}\",\n    \"trainingType\": \"{{chosenTrainingType}}\",\n    \"percentCompleted\": {{random_1_to_100}},\n    \"projectName\": \"{{chosenProject}}\"\n}",
@@ -136,6 +177,37 @@
           "listen": "prerequest",
           "script": {
             "exec": [
+              "function isExpired(token) {",
+              "    try {",
+              "        const payload = JSON.parse(atob(token.split(\".\")[1]));",
+              "        return Date.now() >= payload.exp * 1000;",
+              "    } catch (e) {",
+              "        return true; // unreadable token -> treat as expired",
+              "    }",
+              "}",
+              "",
+              "const existingToken = pm.environment.get(\"token\");",
+              "",
+              "if (!existingToken || isExpired(existingToken)) {",
+              "    pm.sendRequest({",
+              "        url: pm.environment.get(\"URL\") + \":5002/api/login\",",
+              "        method: \"POST\",",
+              "        header: { \"Content-Type\": \"application/json\" },",
+              "        body: {",
+              "            mode: \"raw\",",
+              "            raw: JSON.stringify({ loginId: \"demo\", password: \"1234\" })",
+              "        }",
+              "    }, function (err, res) {",
+              "        if (err) {",
+              "            console.error(\"Login failed:\", err);",
+              "        } else {",
+              "            pm.environment.set(\"token\", res.json().token);",
+              "        }",
+              "    });",
+              "}",
+              "",
+              "",
+              "",
               "const moment = require('moment');",
               "",
               "// Pull a random past timestamp and format it",
@@ -211,7 +283,14 @@
       ],
       "request": {
         "auth": {
-          "type": "noauth"
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
         },
         "method": "POST",
         "header": [
